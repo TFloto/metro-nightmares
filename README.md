@@ -1,12 +1,14 @@
 # MetroDreamin'
 
+#### This is a fork of the original MetroDreamin. I am not god. I cannot add features at a whim. 
+
 MetroDreamin' is a web application that allows users to design and visualize their dream transportation systems, and peruse the transit fantasies of other users from around the world.
 
 This repository contains all the code for the web frontend and Server Side Rendering (SSR) for the webapp.
 
 ## Contact
 
-If you have any feature suggestions, questions, or anything, please [email me](mailto:metrodreamin@gmail.com)!
+If you have any feature suggestions, questions, or anything, please [email the creator](mailto:metrodreamin@gmail.com)!
 
 If you love MetroDreamin', consider donating to the [Ko-fi](https://ko-fi.com/metrodreamin).
 
@@ -40,7 +42,7 @@ The maps themselves are powered by [Mapbox GL](https://docs.mapbox.com/mapbox-gl
 After installing the dependencies, you can run the development server by running:
 
 ```bash
-yarn dev
+yarn next dev
 ```
 
 Then open [http://localhost:3000](http://localhost:3000) with your browser to see the app.
