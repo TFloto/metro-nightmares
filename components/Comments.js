@@ -16,44 +16,39 @@ export const Comments = forwardRef(({ commentData,
                                       onToggleCommentsLocked },
                                     textareaRef) => {
   const firebaseContext = useContext(FirebaseContext);
-
+  const [buttonClicked, setButtonClicked] = useState(false);
   const [input, setInput] = useState('');
 
   const handleChange = useCallback((e) => {
     setInput(e.target.value);
   }, []);
 
-  const handleAddComment = async (e) => {
-    e.preventDefault();
+  const handleAddComment = async () => {
+    // Change the text of the comment button to "Nope"
+    setButtonClicked(true);
 
-    if (!firebaseContext.user) {
-      onToggleShowAuth(true);
-      ReactGA.event({ category: 'System', action: 'Unauthenticated Comment' });
-      return;
-    }
+    // Calculate a random position for the button
+    let randomX = Math.floor(Math.random() * (window.innerWidth - 100)); // Adjust 100 to fit your button's width
+    let randomY = Math.floor(Math.random() * (window.innerHeight - 50)); // Adjust 50 to fit your button's height
 
-    const commentContent = input.replace(/^\n+/, '').replace(/\n+$/, '');
-    if (!commentContent) return;
+    // Ensure the button stays within the window boundaries
+    randomX = Math.max(randomX, 0);
+    randomY = Math.max(randomY, 0);
 
-    try {
-      const commentsCollection = collection(firebaseContext.database, `systems/${systemId}/comments`);
-      await addDoc(commentsCollection, {
-        userId: firebaseContext.user.uid,
-        content: commentContent,
-        systemId: systemId,
-        timestamp: Date.now()
-      });
+    // Get the comment button element
+    const commentButton = document.querySelector('.Comments-submit');
 
-      ReactGA.event({
-        category: 'System',
-        action: 'Add Comment'
-      });
+    // Set the new position of the button
+    commentButton.style.position = 'fixed';
+    commentButton.style.zIndex = '9999'; // Set a high z-index to ensure it renders on top
+    commentButton.style.top = `${randomY}px`;
+    commentButton.style.left = `${randomX}px`;
 
-      setInput('');
-    } catch (e) {
-      console.log('handleAddComment error:', e)
-    }
-  }
+    ReactGA.event({
+      category: 'System',
+      action: 'Add Comment'
+    });
+  };
 
   const getHeadingText = () => {
     const numComments = Math.max((commentData.comments || []).length, commentsCount);
@@ -64,7 +59,7 @@ export const Comments = forwardRef(({ commentData,
     } else {
       return `${numComments} Comments`;
     }
-  }
+  };
 
   const renderLockButton = () => {
     return (
@@ -74,50 +69,13 @@ export const Comments = forwardRef(({ commentData,
           <i className="fa-solid fa-lock-open" data-tooltip-content="Comments unlocked; tap to lock comments"></i>}
       </button>
     );
-  }
+  };
 
   const renderLockedMessage = () => {
     return <div className="Comments-locked">
       Comments are locked.
-    </div>
-  }
-
-  const renderForm = () => {
-    return (
-      <form className="Comments-new" onSubmit={handleAddComment}>
-        <TextareaAutosize className="Comments-textarea" ref={textareaRef}
-                          value={input} placeholder="Add a comment..."
-                          onChange={handleChange} />
-        <button className="Comments-submit Button--primary" type="submit" disabled={input.trim() === ''}>
-          Comment
-        </button>
-      </form>
-    );
-  }
-
-  const renderComments = () => {
-    if (!commentsLocked && !(commentData.comments || []).length) {
-      return <div className="Comments-none">
-        No comments yet. Add one!
-      </div>
-    }
-
-    let commentElems = [];
-
-    for (const comment of commentData.comments) {
-      commentElems.push((
-        <li className="Comments-item" key={comment.id}>
-          <Comment comment={comment}
-                   isCurrentUser={firebaseContext.user && firebaseContext.user.uid === comment.userId}
-                   isOwner={ownerUid === comment.userId} />
-        </li>
-      ))
-    }
-
-    return <ol className="Comments-list">
-      {commentElems}
-    </ol>;
-  }
+    </div>;
+  };
 
   return (
     <div className="Comments SystemSection">
@@ -129,19 +87,45 @@ export const Comments = forwardRef(({ commentData,
         {!firebaseContext.authStateLoading && firebaseContext.user && firebaseContext.user.uid === ownerUid && renderLockButton()}
       </div>
 
-      {commentsLocked ? renderLockedMessage() : renderForm()}
+      {commentsLocked ? renderLockedMessage() : (
+        <form className="Comments-new" onSubmit={(e) => { e.preventDefault(); handleAddComment(); }}>
+          <TextareaAutosize className="Comments-textarea" ref={textareaRef}
+                            value={input} placeholder="Add a comment..."
+                            onChange={handleChange} />
+          <button
+            className={`Comments-submit Button--primary ${buttonClicked ? 'clicked' : ''}`}
+            type="submit"
+            disabled={input.trim() === ''}
+          >
+            {buttonClicked ? 'Nope' : 'Comment'}
+          </button>
+        </form>
+      )}
 
-      {commentData.commentsLoaded && renderComments()}
+      {commentData.commentsLoaded && (
+        <ol className="Comments-list">
+          {(commentData.comments || []).map(comment => (
+            <li className="Comments-item" key={comment.id}>
+              <Comment
+                comment={comment}
+                isCurrentUser={firebaseContext.user && firebaseContext.user.uid === comment.userId}
+                isOwner={ownerUid === comment.userId}
+              />
+            </li>
+          ))}
+        </ol>
+      )}
 
       {commentData.commentsLoaded && !commentData.showAllComments && (
-        <button className="Comments-showAll"
-                onClick={() => {
-                  commentData.setShowAllComments(true);
-                  ReactGA.event({
-                    category: 'System',
-                    action: 'Show All Comments'
-                  });
-                }}
+        <button
+          className="Comments-showAll"
+          onClick={() => {
+            commentData.setShowAllComments(true);
+            ReactGA.event({
+              category: 'System',
+              action: 'Show All Comments'
+            });
+          }}
         >
           <i className="fas fa-chevron-circle-down"></i>
           <span className="Comments-allText">Show all comments</span>

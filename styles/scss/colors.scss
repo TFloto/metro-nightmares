@@ -1,14 +1,17 @@
+// Define pink color
+$pink: #ff69b4; // Adjust the shade as needed
+
 // Use this mixin to style both light and dark mode with the same call
 @mixin color($type, $prop: 'color') {
   .DarkMode &
   {
     @if $type == main
     {
-      #{$prop}: $black;
+      #{$prop}: $pink;
     }
     @else if $type == opp
     {
-      #{$prop}: $white;
+      #{$prop}: $pink;
     }
     @else if $type == near
     {
@@ -68,7 +71,7 @@
   {
     @if $type == main
     {
-      #{$prop}: $white;
+      #{$prop}: $pink;
     }
     @else if $type == opp
     {

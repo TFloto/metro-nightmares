@@ -5,7 +5,7 @@
   "scripts": {
     "local": "NEXT_PUBLIC_LOCAL=true NEXT_PUBLIC_STAGING=true next dev",
     "localfuncs": "NEXT_PUBLIC_LOCALFUNCS=true NEXT_PUBLIC_STAGING=true next dev",
-    "dev": "NEXT_PUBLIC_STAGING=true next dev",
+    "dev": "NEXT_PUBLIC_STAGING=true",
     "prod": "NEXT_PUBLIC_PROD=true next dev",
     "build": "next build",
     "postbuild": "next-sitemap",
@@ -52,7 +52,7 @@
     "typescript": "4.9.3"
   },
   "engines": {
-    "node": "18.x.x"
+    "node": ">18.x.x"
   },
   "browserslist": [
     ">0.2%",
@@ -61,5 +61,17 @@
     "ie >= 11",
     "safari >= 8",
     "not op_mini all"
-  ]
+  ],
+  "description": "MetroDreamin' is a web application that allows users to design and visualize their dream transportation systems, and peruse the transit fantasies of other users from around the world.",
+  "main": "next-sitemap.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TFloto/metro-dreamin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TFloto/metro-dreamin/issues"
+  },
+  "homepage": "https://github.com/TFloto/metro-dreamin#readme"
 }
