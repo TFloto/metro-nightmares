@@ -1,18 +1,18 @@
-# MetroDreamin'
-
-MetroDreamin' is a web application that allows users to design and visualize their dream transportation systems, and peruse the transit fantasies of other users from around the world.
+# MetroNIGHTMARENIGHTMARENIGHTMARENIGHTMARENIGHTMARENIGHTMARE'
+#### This is a fork of the original MetroDreamin. I am not god. I cannot add features at a whim. 
+MetroNIGHTMARENIGHTMARENIGHTMARENIGHTMARENIGHTMARENIGHTMARE' is a web application that allows users to design and visualize their dream transportation systems, and peruse the transit fantasies of other users from around the world.
 
 This repository contains all the code for the web frontend and Server Side Rendering (SSR) for the webapp.
 
 ## Contact
 
-If you have any feature suggestions, questions, or anything, please [email me](mailto:metrodreamin@gmail.com)!
+If you have any feature suggestions, questions, or anything, please [die](https://imgur.com/gallery/Kyjh8u6)!
 
-If you love MetroDreamin', consider donating to the [Ko-fi](https://ko-fi.com/metrodreamin).
+If you love MetroDreamin', consider donating to Issacs [Ko-fi](https://ko-fi.com/MetroDreamin).
 
 ## Implementation
 
-MetroDreamin' is a [Next.js](https://nextjs.org/) project, which is an isomorphic/"Universal" javascript framework built on top of React. The isomorphic nature of Next.js is why this repository include portions of the backend of the project, namely the SSR. *Note: MetroDreamin' uses the Next.js "pages" directory, not the "app" directory.*
+MetroNIGHTMARENIGHTMARENIGHTMARENIGHTMARENIGHTMARENIGHTMARE' is a [Next.js](https://nextjs.org/) project, which is an isomorphic/"Universal" javascript framework built on top of React. The isomorphic nature of Next.js is why this repository include portions of the backend of the project, namely the SSR. *Note: MetroNIGHTMARENIGHTMARENIGHTMARENIGHTMARENIGHTMARENIGHTMARE' uses the Next.js "pages" directory, not the "app" directory.*
 
 Much of the backend of the project, including the NoSQL database, authentification, and blob storage, is powered by [Firebase](https://firebase.google.com/).
 
@@ -21,7 +21,7 @@ The maps themselves are powered by [Mapbox GL](https://docs.mapbox.com/mapbox-gl
 ## Project Structure
 
 ### App routes: `pages/`
-`pages/` contains all the code for the Next.js routes for all the – you guessed it – pages for MetroDreamin's front end. Most of the pages utilize SSR in their implementation.
+`pages/` contains all the code for the Next.js routes for all the – you guessed it – pages for MetroNIGHTMARENIGHTMARENIGHTMARENIGHTMARENIGHTMARENIGHTMARE's front end. Most of the pages utilize SSR in their implementation.
 
 ### React components: `components/`
 `components/` contains the React componts used on the above pages.
@@ -30,7 +30,7 @@ The maps themselves are powered by [Mapbox GL](https://docs.mapbox.com/mapbox-gl
 `util/` contains the reusable snippets used throughout the app including contexts, hooks, helper functions, etc.
 
 ### Styling: `styles/`
-`styles/` includes the SCSS that makes MetroDreamin' look pretty.
+`styles/` includes the SCSS that makes MetroNIGHTMARENIGHTMARENIGHTMARENIGHTMARENIGHTMARENIGHTMARE' look pretty.
 
 ### Assets: `public/`
 `public/` includes static assets used on the site.
